@@ -23,11 +23,16 @@ export async function POST(req: NextRequest) {
 
     if (fileType === 'application/pdf' || file.name.endsWith('.pdf')) {
       try {
-        // Dynamic import of pdf-parse for Next.js server runtime
         // eslint-disable-next-line @typescript-eslint/no-require-imports
-        const pdfParse = require('pdf-parse');
-        const pdfData = await pdfParse(buffer);
-        extractedText = pdfData.text || '';
+        const pdfParseModule = require('pdf-parse');
+        if (pdfParseModule.PDFParse) {
+          const parser = new pdfParseModule.PDFParse(new Uint8Array(buffer));
+          const pdfResult = await parser.getText();
+          extractedText = pdfResult.text || pdfResult || '';
+        } else if (typeof pdfParseModule === 'function') {
+          const pdfData = await pdfParseModule(buffer);
+          extractedText = pdfData.text || '';
+        }
       } catch (pdfErr) {
         console.warn('PDF parsing error, falling back to basic buffer string extraction:', pdfErr);
         // Fallback: extract visible ASCII text from PDF streams

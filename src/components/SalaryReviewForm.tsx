@@ -117,7 +117,7 @@ export function SalaryReviewForm({
             <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
               Calculated Annual Gross Earnings
             </span>
-            <div className="text-2xl font-extrabold text-emerald-400">
+            <div className="text-2xl font-extrabold text-purple-300">
               {formatINR(grossTotal)}
               <span className="text-xs font-normal text-slate-300 ml-2">
                 (~{formatINR(Math.round(grossTotal / 12))}/month)
@@ -143,7 +143,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('basicSalary') || ''}
                 onChange={(e) => handleFieldChange('basicSalary', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">
@@ -163,7 +163,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('hraReceived') || ''}
                 onChange={(e) => handleFieldChange('hraReceived', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">
@@ -183,7 +183,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('specialAllowance') || ''}
                 onChange={(e) => handleFieldChange('specialAllowance', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Fully taxable allowance component.</p>
@@ -201,7 +201,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('lta') || ''}
                 onChange={(e) => handleFieldChange('lta', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Travel allowance component.</p>
@@ -219,7 +219,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('bonus') || ''}
                 onChange={(e) => handleFieldChange('bonus', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Performance bonus, joining bonus, or variable pay.</p>
@@ -237,7 +237,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('otherAllowances') || ''}
                 onChange={(e) => handleFieldChange('otherAllowances', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Medical, conveyance, telephone, food coupons, etc.</p>
@@ -255,7 +255,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('employeePF') || ''}
                 onChange={(e) => handleFieldChange('employeePF', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">
@@ -275,7 +275,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('employerPF') || ''}
                 onChange={(e) => handleFieldChange('employerPF', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">
@@ -295,7 +295,7 @@ export function SalaryReviewForm({
                 value={getFieldValue('professionalTax') || ''}
                 onChange={(e) => handleFieldChange('professionalTax', e.target.value)}
                 placeholder="0"
-                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
               />
             </div>
             <p className="text-[11px] text-slate-500 mt-1">
@@ -318,7 +318,7 @@ export function SalaryReviewForm({
           <button
             type="button"
             onClick={() => onConfirm(salaryState)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95"
           >
             <span>Proceed to Tax Deductions</span>
             <ArrowRight className="w-4 h-4" />

@@ -108,7 +108,7 @@ export function DeductionsForm({
                   value={deductions.rentPaidAnnually || ''}
                   onChange={(e) => handleNumberInput('rentPaidAnnually', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -123,7 +123,7 @@ export function DeductionsForm({
               <select
                 value={deductions.cityCategory}
                 onChange={(e) => updateField('cityCategory', e.target.value as any)}
-                className="w-full px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900 bg-white"
+                className="w-full px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900 bg-white"
               >
                 <option value="metro">Metro (Delhi, Mumbai, Kolkata, Chennai) - 50% limit</option>
                 <option value="non-metro">Non-Metro (Bengaluru, Hyderabad, Pune, etc.) - 40% limit</option>
@@ -191,7 +191,7 @@ export function DeductionsForm({
                   value={deductions.other80CInvestments || ''}
                   onChange={(e) => handleNumberInput('other80CInvestments', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -249,7 +249,7 @@ export function DeductionsForm({
                     type="checkbox"
                     checked={deductions.isSelfSeniorCitizen}
                     onChange={(e) => updateField('isSelfSeniorCitizen', e.target.checked)}
-                    className="rounded text-emerald-600 focus:ring-emerald-500"
+                    className="rounded text-emerald-600 focus:ring-purple-500"
                   />
                   <span>Senior Citizen (60+ yrs)</span>
                 </label>
@@ -261,7 +261,7 @@ export function DeductionsForm({
                   value={deductions.healthInsuranceSelfFamily || ''}
                   onChange={(e) => handleNumberInput('healthInsuranceSelfFamily', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -304,7 +304,7 @@ export function DeductionsForm({
                   value={deductions.healthInsuranceParents || ''}
                   onChange={(e) => handleNumberInput('healthInsuranceParents', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -323,7 +323,7 @@ export function DeductionsForm({
                   value={deductions.preventiveHealthCheckup || ''}
                   onChange={(e) => handleNumberInput('preventiveHealthCheckup', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -362,7 +362,7 @@ export function DeductionsForm({
                   value={deductions.npsSelfContribution || ''}
                   onChange={(e) => handleNumberInput('npsSelfContribution', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -382,7 +382,7 @@ export function DeductionsForm({
                   value={deductions.employerNPSContribution || ''}
                   onChange={(e) => handleNumberInput('employerNPSContribution', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -402,7 +402,7 @@ export function DeductionsForm({
                   value={deductions.homeLoanInterestSelfOccupied || ''}
                   onChange={(e) => handleNumberInput('homeLoanInterestSelfOccupied', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -422,7 +422,7 @@ export function DeductionsForm({
                   value={deductions.educationLoanInterest || ''}
                   onChange={(e) => handleNumberInput('educationLoanInterest', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
@@ -460,7 +460,7 @@ export function DeductionsForm({
                   value={deductions.interestIncome || ''}
                   onChange={(e) => handleNumberInput('interestIncome', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
             </div>
@@ -476,7 +476,7 @@ export function DeductionsForm({
                   value={deductions.rentalIncome || ''}
                   onChange={(e) => handleNumberInput('rentalIncome', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
             </div>
@@ -492,7 +492,7 @@ export function DeductionsForm({
                   value={deductions.otherIncome || ''}
                   onChange={(e) => handleNumberInput('otherIncome', e.target.value)}
                   placeholder="0"
-                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 text-slate-900"
+                  className="w-full pl-8 pr-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-purple-500 text-slate-900"
                 />
               </div>
             </div>
@@ -513,9 +513,9 @@ export function DeductionsForm({
           <button
             type="button"
             onClick={() => onCalculate(deductions)}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95"
           >
-            <Sparkles className="w-4 h-4 text-emerald-200" />
+            <Sparkles className="w-4 h-4 text-purple-200" />
             <span>Compare Regimes & Get Recommendation</span>
             <ArrowRight className="w-4 h-4" />
           </button>

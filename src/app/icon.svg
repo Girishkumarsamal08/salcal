@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B0764" />
+      <stop offset="50%" stop-color="#581C87" />
+      <stop offset="100%" stop-color="#7E22CE" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded container -->
+  <rect width="512" height="512" rx="115" fill="url(#bgGrad)" />
+  <!-- Subtle inner border -->
+  <rect x="12" y="12" width="488" height="488" rx="103" fill="none" stroke="#C084FC" stroke-width="16" stroke-opacity="0.35" />
+  
+  <!-- Curved dynamic accent arc like SALCAL logo -->
+  <path d="M 110 370 Q 256 290 402 360" fill="none" stroke="url(#accentGrad)" stroke-width="28" stroke-linecap="round" opacity="0.9" />
+  
+  <!-- Text SC -->
+  <g fill="#FFFFFF" font-family="system-ui, -apple-system, 'SF Pro Display', 'Inter', sans-serif" font-weight="900" font-size="240" letter-spacing="-8">
+    <text x="256" y="330" text-anchor="middle">
+      <tspan fill="#FFFFFF">S</tspan><tspan fill="#E9D5FF">C</tspan>
+    </text>
+  </g>
+</svg>

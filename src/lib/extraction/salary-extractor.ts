@@ -34,49 +34,49 @@ export function parseSalarySlipText(rawText: string): ExtractedSalaryData {
 
   // 1. Basic Salary patterns
   const basicField = extractAmount([
-    /(?:basic\s*(?:salary|pay)?|basic)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:basic\s*(?:salary|pay)?|basic)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
     /(?:basic)\s+(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 2. HRA patterns
   const hraField = extractAmount([
-    /(?:house\s*rent\s*allowance|hra)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:house\s*rent\s*allowance|hra)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
     /(?:hra)\s+(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 3. Special Allowance
   const specialAllowanceField = extractAmount([
-    /(?:special\s*allowance|spl\s*alw|supplementary\s*allowance)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:special\s*allowance|spl\s*alw|supplementary\s*allowance)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 4. LTA (Leave Travel Allowance)
   const ltaField = extractAmount([
-    /(?:leave\s*travel\s*allowance|lta|ltc)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:leave\s*travel\s*allowance|lta|ltc)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 5. Bonus / Incentives
   const bonusField = extractAmount([
-    /(?:bonus|statutory\s*bonus|performance\s*pay|incentive)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:performance\s*bonus|bonus|statutory\s*bonus|performance\s*pay|incentives?)(?:\s*\/[^\d\n]+)?(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 6. Employee Provident Fund (PF / EPF)
   const employeePFField = extractAmount([
-    /(?:provident\s*fund|pf\s*employee|employee\s*pf|epf\s*employee|epf|pf)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:employee\s*provident\s*fund|provident\s*fund|pf\s*employee|employee\s*pf|epf\s*employee|epf|pf)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 7. Employer PF
   const employerPFField = extractAmount([
-    /(?:employer\s*pf|employer\s*contribution\s*to\s*pf|employer\s*epf)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:employer\s*pf|employer\s*contribution\s*to\s*pf|employer\s*epf|employer\s*pf\s*contribution)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 8. Professional Tax (PT)
   const ptField = extractAmount([
-    /(?:professional\s*tax|prof\s*tax|pt)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:professional\s*tax|prof\s*tax|pt)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
   ]);
 
   // 9. Gross Salary / Total Earnings
   let grossField = extractAmount([
-    /(?:gross\s*(?:salary|earnings|pay|remuneration)?|total\s*earnings)\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
+    /(?:total\s*earnings|total\s*gross\s*salary|gross\s*(?:salary|earnings|pay|remuneration)?)(?:\s*\([^)]*\))?\s*[:\-\s]*₹?\s*(\d+(?:\.\d{1,2})?)/i,
     /(?:gross)\s+(\d+(?:\.\d{1,2})?)/i,
   ]);
 
@@ -102,7 +102,7 @@ export function parseSalarySlipText(rawText: string): ExtractedSalaryData {
     }
   }
 
-  const nameMatch = rawText.match(/(?:employee\s*name|name)\s*[:\-\s]*([A-Za-z\s.]+)/i);
+  const nameMatch = rawText.match(/(?:employee\s*name|name)\s*[:\-\s]*([A-Za-z\t .]+?)(?:\s*(?:employee\s*id|emp\s*id|id|dept|designation)|[\r\n]|$)/i);
   if (nameMatch && nameMatch[1]) {
     employeeName = nameMatch[1].trim();
   }

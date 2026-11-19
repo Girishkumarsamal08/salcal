@@ -5,8 +5,14 @@ export const metadata: Metadata = {
   title: "SALCAL – Smart Tax Regime Advisor & Salary Analyzer",
   description: "Intelligent salary-based income tax regime comparison and recommendation portal for Indian salaried employees. Powered by SALCAL.",
   icons: {
-    icon: "/salcal-logo.png",
-    apple: "/salcal-logo.png",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 

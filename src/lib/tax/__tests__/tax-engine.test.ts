@@ -219,3 +219,32 @@ describe('Recommendation Engine', () => {
     expect(rec.detailedFactors.length).toBeGreaterThan(2);
   });
 });
+
+describe('Salary Slip Extractor & Parsing', () => {
+  it('should accurately parse Indian payslip text components into annual figures', async () => {
+    const { parseSalarySlipText } = await import('../../extraction/salary-extractor');
+    const payslipText = `TECHFLOW SOLUTIONS PRIVATE LIMITED
+PAYSLIP FOR THE MONTH OF OCTOBER 2024
+Employee Name: Rohan S. Deshmukh
+Basic Salary 55000 Employee Provident Fund (EPF) 6600
+House Rent Allowance (HRA) 27500 Professional Tax (PT) 200
+Special Allowance 32000 Income Tax (TDS) 8500
+Leave Travel Allowance (LTA) 5000 Employer PF Contribution 6600
+Performance Bonus / Incentives 15000
+Total Earnings (Gross Salary) 134500 Total Deductions 15300
+NET SALARY PAYABLE: INR 119200`;
+
+    const parsed = parseSalarySlipText(payslipText);
+
+    // Monthly values multiplied by 12
+    expect(parsed.basicSalary.value).toBe(55000 * 12); // 6,60,000
+    expect(parsed.hraReceived.value).toBe(27500 * 12); // 3,30,000
+    expect(parsed.specialAllowance.value).toBe(32000 * 12); // 3,84,000
+    expect(parsed.lta.value).toBe(5000 * 12); // 60,000
+    expect(parsed.bonus.value).toBe(15000 * 12); // 1,80,000
+    expect(parsed.annualGrossSalary.value).toBe(134500 * 12); // 16,14,000
+    expect(parsed.employeePF.value).toBe(6600 * 12); // 79,200
+    expect(parsed.professionalTax.value).toBe(200 * 12); // 2,400
+    expect(parsed.employeeName).toBe('Rohan S. Deshmukh');
+  });
+});

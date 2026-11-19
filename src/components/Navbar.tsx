@@ -13,6 +13,9 @@ interface NavbarProps {
   onReset: () => void;
   hasCalculated: boolean;
   onOpenReport?: () => void;
+  onStartCTC?: () => void;
+  onStartUpload?: () => void;
+  activeStep?: string;
 }
 
 export function Navbar({
@@ -22,25 +25,57 @@ export function Navbar({
   onReset,
   hasCalculated,
   onOpenReport,
+  onStartCTC,
+  onStartUpload,
+  activeStep,
 }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand with SALCAL logo */}
-        <div className="flex items-center gap-3 cursor-pointer select-none" onClick={onReset}>
-          <div className="relative h-9 w-32 flex items-center">
-            <Image
-              src="/salcal-logo.png"
-              alt="SALCAL Logo"
-              width={140}
-              height={36}
-              className="object-contain object-left h-8 w-auto"
-              priority
-            />
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 cursor-pointer select-none" onClick={onReset}>
+            <div className="relative h-9 w-32 flex items-center">
+              <Image
+                src="/salcal-logo.png"
+                alt="SALCAL Logo"
+                width={140}
+                height={36}
+                className="object-contain object-left h-8 w-auto"
+                priority
+              />
+            </div>
+            <span className="hidden sm:inline-flex text-[11px] font-bold bg-purple-100 text-purple-900 px-2.5 py-0.5 rounded-full border border-purple-200">
+              FY {currentFY}
+            </span>
           </div>
-          <span className="hidden sm:inline-flex text-[11px] font-bold bg-purple-100 text-purple-900 px-2.5 py-0.5 rounded-full border border-purple-200">
-            FY {currentFY}
-          </span>
+
+          {/* Quick Navigation Modes */}
+          <div className="hidden lg:flex items-center gap-1 border-l border-slate-200 pl-4">
+            <button
+              type="button"
+              onClick={onStartCTC}
+              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 ${
+                activeStep === 'ctc-structuring'
+                  ? 'bg-purple-50 text-purple-800 border border-purple-200'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+              <span>CTC Structuring</span>
+            </button>
+            <button
+              type="button"
+              onClick={onStartUpload}
+              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                activeStep === 'upload'
+                  ? 'bg-purple-50 text-purple-800 border border-purple-200'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span>Payslip Upload</span>
+            </button>
+          </div>
         </div>
 
         {/* Controls */}

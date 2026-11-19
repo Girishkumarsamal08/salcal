@@ -10,6 +10,7 @@ import { SalaryUpload } from '@/components/SalaryUpload';
 import { SalaryReviewForm } from '@/components/SalaryReviewForm';
 import { DeductionsForm } from '@/components/DeductionsForm';
 import { ComparisonDashboard } from '@/components/ComparisonDashboard';
+import { CTCStructuringDashboard } from '@/components/CTCStructuringDashboard';
 
 const defaultSalary: SalaryComponents = {
   basicSalary: 600000,
@@ -43,15 +44,22 @@ const defaultDeductions: AdditionalDeductions = {
   cityCategory: 'metro',
 };
 
-type AppStep = 'landing' | 'upload' | 'review-salary' | 'deductions' | 'dashboard';
+type AppStep = 'landing' | 'ctc-structuring' | 'upload' | 'review-salary' | 'deductions' | 'dashboard';
 
 export default function TaxWiseApp() {
   const [financialYear, setFinancialYear] = useState<FinancialYear>('2024-2025');
   const [step, setStep] = useState<AppStep>('landing');
+  const [selectedCTC, setSelectedCTC] = useState<number>(1200000);
   const [salary, setSalary] = useState<SalaryComponents>(defaultSalary);
   const [deductions, setDeductions] = useState<AdditionalDeductions>(defaultDeductions);
   const [extractedMeta, setExtractedMeta] = useState<ExtractedSalaryData | null>(null);
   const [recommendation, setRecommendation] = useState<TaxComparisonRecommendation | null>(null);
+
+  // Start CTC Structuring flow
+  const handleStartCTCStructuring = (ctc: number = 1200000) => {
+    setSelectedCTC(ctc);
+    setStep('ctc-structuring');
+  };
 
   // Load a sample demo profile
   const handleSelectDemo = (profile: DemoProfile) => {
@@ -123,6 +131,9 @@ export default function TaxWiseApp() {
         onReset={handleReset}
         hasCalculated={!!recommendation}
         onOpenReport={() => setStep('dashboard')}
+        onStartCTC={() => handleStartCTCStructuring(selectedCTC)}
+        onStartUpload={() => setStep('upload')}
+        activeStep={step}
       />
 
       {/* Main Body */}
@@ -131,7 +142,17 @@ export default function TaxWiseApp() {
           <LandingHero
             onStartUpload={() => setStep('upload')}
             onStartManual={() => setStep('review-salary')}
+            onStartCTCStructuring={handleStartCTCStructuring}
             onSelectDemo={handleSelectDemo}
+          />
+        )}
+
+        {step === 'ctc-structuring' && (
+          <CTCStructuringDashboard
+            initialCTC={selectedCTC}
+            initialFY={financialYear}
+            onSwitchToUpload={() => setStep('upload')}
+            onSwitchToManual={() => setStep('review-salary')}
           />
         )}
 

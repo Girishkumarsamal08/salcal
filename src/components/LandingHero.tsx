@@ -1,21 +1,50 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { DEMO_PROFILES, DemoProfile } from '@/lib/demo-data';
-import { UploadCloud, Edit3, ArrowRight, CheckCircle2, TrendingDown, Percent, Zap, Sparkles } from 'lucide-react';
+import {
+  UploadCloud,
+  Edit3,
+  ArrowRight,
+  CheckCircle2,
+  TrendingDown,
+  Percent,
+  Zap,
+  Sparkles,
+  Building2,
+  ShieldCheck,
+} from 'lucide-react';
 
 interface LandingHeroProps {
   onStartUpload: () => void;
   onStartManual: () => void;
+  onStartCTCStructuring: (ctc?: number) => void;
   onSelectDemo: (profile: DemoProfile) => void;
 }
+
+const PRESET_CTCS = [
+  { label: '₹6 LPA', value: 600000 },
+  { label: '₹10 LPA', value: 1000000 },
+  { label: '₹12 LPA', value: 1200000 },
+  { label: '₹15 LPA', value: 1500000 },
+  { label: '₹18 LPA', value: 1800000 },
+  { label: '₹25 LPA', value: 2500000 },
+];
 
 export function LandingHero({
   onStartUpload,
   onStartManual,
+  onStartCTCStructuring,
   onSelectDemo,
 }: LandingHeroProps) {
+  const [ctcInputValue, setCtcInputValue] = useState<string>('1200000');
+
+  const handleCTCClick = () => {
+    const val = parseInt(ctcInputValue.replace(/[^0-9]/g, ''), 10) || 1200000;
+    onStartCTCStructuring(val);
+  };
+
   return (
     <div className="relative overflow-hidden py-8 md:py-14">
       {/* Background glow */}
@@ -48,45 +77,107 @@ export function LandingHero({
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-          Upload your salary slip or enter your compensation details. Compare the Old and New Tax Regimes with precision mathematical verification and get clear actionable insights.
+        <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          Enter your Annual CTC or upload your salary slip. Automatic RazorpayX-style salary structuring, precise take-home calculation, and mathematical Old vs New Regime recommendation.
         </p>
 
-        {/* Primary CTA Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={onStartUpload}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all duration-150 transform active:scale-95"
-          >
-            <UploadCloud className="w-5 h-5 text-purple-200" />
-            <span>Upload Salary Slip (PDF / Image)</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+        {/* FEATURED: Instant CTC Salary Structuring Card */}
+        <div className="mt-8 max-w-2xl mx-auto bg-white p-5 sm:p-6 rounded-3xl border-2 border-purple-200/80 shadow-lg text-left relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/40 rounded-full blur-2xl pointer-events-none" />
 
-          <button
-            type="button"
-            onClick={onStartManual}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold text-sm shadow-2xs hover:border-slate-400 transition-all duration-150"
-          >
-            <Edit3 className="w-4 h-4 text-purple-600" />
-            <span>Calculate Manually</span>
-          </button>
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-black uppercase tracking-wider text-purple-900 flex items-center gap-1.5">
+              <Building2 className="w-4 h-4 text-purple-600" />
+              <span>Automatic CTC Salary Distribution Engine</span>
+            </span>
+            <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              RazorpayX-Inspired
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-stretch gap-2.5">
+            <div className="relative flex-1">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-bold text-slate-400">
+                ₹
+              </span>
+              <input
+                type="text"
+                value={ctcInputValue}
+                onChange={(e) => setCtcInputValue(e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="1200000"
+                className="w-full pl-9 pr-24 py-3.5 text-base sm:text-lg font-black text-slate-900 rounded-2xl border-2 border-slate-200 focus:outline-hidden focus:border-purple-600 focus:ring-4 focus:ring-purple-100 transition-all"
+              />
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                Annual CTC
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCTCClick}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform active:scale-95 shrink-0"
+            >
+              <span>Structure Salary</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Quick Preset Buttons */}
+          <div className="mt-3.5 flex flex-wrap items-center gap-1.5 text-xs">
+            <span className="text-[11px] font-bold text-slate-500 mr-1">Presets:</span>
+            {PRESET_CTCS.map((preset) => (
+              <button
+                key={preset.value}
+                type="button"
+                onClick={() => {
+                  setCtcInputValue(preset.value.toString());
+                  onStartCTCStructuring(preset.value);
+                }}
+                className="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-slate-100 hover:bg-purple-100/70 text-slate-700 hover:text-purple-900 transition-colors"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Secondary Options: Payslip Upload or Manual Entry */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs">
+          <span className="text-slate-400 font-medium">Or have an existing payslip?</span>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onStartUpload}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold shadow-2xs transition-colors"
+            >
+              <UploadCloud className="w-3.5 h-3.5 text-purple-600" />
+              <span>Upload Payslip (PDF / OCR)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onStartManual}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold shadow-2xs transition-colors"
+            >
+              <Edit3 className="w-3.5 h-3.5 text-purple-600" />
+              <span>Manual Entry</span>
+            </button>
+          </div>
         </div>
 
         {/* Value Prop Badges */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 font-medium">
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-            <span>Instant In-Browser OCR</span>
+            <span>Zero Manual Splitting</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Percent className="w-4 h-4 text-emerald-600" />
-            <span>Accurate HRA & 80C Limits</span>
+            <span>Accurate HRA, EPF &amp; Gratuity</span>
           </div>
           <div className="flex items-center gap-1.5">
             <TrendingDown className="w-4 h-4 text-emerald-600" />
-            <span>Net Monthly In-Hand Analysis</span>
+            <span>Exact Monthly Take-Home</span>
           </div>
         </div>
 

@@ -1,11 +1,12 @@
-# TaxWise – Smart Indian Income Tax Regime Recommendation Portal
+# SALCAL – Smart Tax Regime Advisor & Salary Analyzer
 
-> An intelligent, production-quality salary-based tax recommendation portal for Indian salaried employees. Extract salary components from salary slips (PDF/Images) or enter data manually, compare tax liabilities under the Old and New Tax Regimes with full statutory accuracy (Finance Act 2024 / FY 2024-25 & FY 2023-24), and receive actionable mathematical recommendations.
+> An intelligent, production-quality salary-based tax recommendation portal for Indian salaried employees. Extract salary components from salary slips (PDF/Images) or enter data manually, compare tax liabilities under the Old and New Tax Regimes with full statutory accuracy (Budget 2025 / FY 2025-26, Finance Act 2024 / FY 2024-25, and FY 2023-24), and receive actionable mathematical recommendations.
 
 ---
 
 ## 🚀 Live Demo & Deployment
 
+- **Live Web App**: [https://saltaxcal.vercel.app/](https://saltaxcal.vercel.app/)
 - **GitHub Repository**: [https://github.com/Girishkumarsamal08/salcal](https://github.com/Girishkumarsamal08/salcal)
 - **Framework**: Next.js 16 (App Router) + TypeScript + Tailwind CSS
 
@@ -15,7 +16,7 @@
 
 Salaried employees in India often face confusion when selecting between the **Old Tax Regime** and the **New Tax Regime (Section 115BAC)** during company declaration windows and year-end tax filing. Many default to the New Tax Regime without evaluating whether their HRA, 80C investments, health insurance (80D), or home loan interest (24b) would save them more under the Old Regime.
 
-**TaxWise** solves this by:
+**SALCAL** solves this by:
 1. **Automated Salary Parsing**: In-browser OCR (Tesseract.js) and server-side PDF parsing to extract Basic Pay, HRA, Special Allowances, PF, PT, and Bonus without storing documents.
 2. **Deterministic Financial Engine**: Independent calculators for Old and New Regimes implementing official Indian Income Tax rules, including Finance Act 2024 changes (enhanced ₹75,000 standard deduction and revised slabs).
 3. **Smart Recommendation**: Delivers a clear verdict (`OLD REGIME RECOMMENDED`, `NEW REGIME RECOMMENDED`, or `EQUAL`) backed by an itemized mathematical audit of why that regime won and the exact break-even deductions threshold.

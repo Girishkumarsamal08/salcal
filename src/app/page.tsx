@@ -174,13 +174,13 @@ export default function TaxWiseApp() {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 no-print">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© 2025 TaxWise – Indian Income Tax Regime Recommendation Portal</p>
+          <p>© 2025–2026 SALCAL – Smart Tax Regime Advisor & Salary Analyzer</p>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>Finance Act 2024 Verified</span>
+            <span>Budget 2025 & Finance Act 2024 Verified</span>
             <span>•</span>
             <span>Section 115BAC & Old Regime</span>
             <span>•</span>
-            <span>Privacy First (In-Memory Processing)</span>
+            <span>Privacy First (Zero Document Storage)</span>
           </div>
         </div>
       </footer>

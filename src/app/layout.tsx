@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TaxWise – Smart Indian Tax Regime Advisor",
-  description: "Intelligent salary-based income tax regime comparison and recommendation portal for Indian salaried employees.",
+  title: "SALCAL – Smart Tax Regime Advisor & Salary Analyzer",
+  description: "Intelligent salary-based income tax regime comparison and recommendation portal for Indian salaried employees. Powered by SALCAL.",
+  icons: {
+    icon: "/salcal-logo.png",
+    apple: "/salcal-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900">
         {children}
       </body>
     </html>

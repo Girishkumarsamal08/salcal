@@ -24,12 +24,12 @@ export function generateTaxPDFReport(
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
-  doc.text('TaxWise', 14, 16);
+  doc.text('SALCAL', 14, 16);
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(148, 163, 184); // Slate 400
-  doc.text('Smart Indian Tax Regime Advisor', 14, 23);
+  doc.text('Smart Tax Regime Advisor & Salary Analyzer', 14, 23);
   doc.text(`Financial Year: ${fy} | Assessment Year: ${ay}`, 14, 29);
 
   // Generation Date & User

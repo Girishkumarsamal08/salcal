@@ -1,69 +1,189 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import { FinancialYear, SalaryComponents, AdditionalDeductions, ExtractedSalaryData, TaxComparisonRecommendation } from '@/lib/tax/types';
+import { recommendTaxRegime } from '@/lib/tax/recommendation-engine';
+import { DEMO_PROFILES, DemoProfile } from '@/lib/demo-data';
+import { Navbar } from '@/components/Navbar';
+import { LandingHero } from '@/components/LandingHero';
+import { SalaryUpload } from '@/components/SalaryUpload';
+import { SalaryReviewForm } from '@/components/SalaryReviewForm';
+import { DeductionsForm } from '@/components/DeductionsForm';
+import { ComparisonDashboard } from '@/components/ComparisonDashboard';
+
+const defaultSalary: SalaryComponents = {
+  basicSalary: 600000,
+  hraReceived: 240000,
+  specialAllowance: 200000,
+  lta: 30000,
+  bonus: 80000,
+  otherAllowances: 0,
+  employeePF: 72000,
+  employerPF: 72000,
+  professionalTax: 2500,
+};
+
+const defaultDeductions: AdditionalDeductions = {
+  other80CInvestments: 80000,
+  healthInsuranceSelfFamily: 20000,
+  isSelfSeniorCitizen: false,
+  healthInsuranceParents: 25000,
+  parentsAgeCategory: 'senior',
+  preventiveHealthCheckup: 5000,
+  npsSelfContribution: 50000,
+  employerNPSContribution: 0,
+  homeLoanInterestSelfOccupied: 0,
+  educationLoanInterest: 0,
+  savingsInterestDeduction: 10000,
+  otherDeductions: 0,
+  interestIncome: 10000,
+  rentalIncome: 0,
+  otherIncome: 0,
+  rentPaidAnnually: 180000, // 15k/month
+  cityCategory: 'metro',
+};
+
+type AppStep = 'landing' | 'upload' | 'review-salary' | 'deductions' | 'dashboard';
+
+export default function TaxWiseApp() {
+  const [financialYear, setFinancialYear] = useState<FinancialYear>('2024-2025');
+  const [step, setStep] = useState<AppStep>('landing');
+  const [salary, setSalary] = useState<SalaryComponents>(defaultSalary);
+  const [deductions, setDeductions] = useState<AdditionalDeductions>(defaultDeductions);
+  const [extractedMeta, setExtractedMeta] = useState<ExtractedSalaryData | null>(null);
+  const [recommendation, setRecommendation] = useState<TaxComparisonRecommendation | null>(null);
+
+  // Load a sample demo profile
+  const handleSelectDemo = (profile: DemoProfile) => {
+    setSalary(profile.salary);
+    setDeductions(profile.deductions);
+    setExtractedMeta(null);
+    const rec = recommendTaxRegime(profile.salary, profile.deductions, financialYear);
+    setRecommendation(rec);
+    setStep('dashboard');
+  };
+
+  // Switch FY and recalculate if already in dashboard
+  const handleFYChange = (newFY: FinancialYear) => {
+    setFinancialYear(newFY);
+    if (recommendation) {
+      const updated = recommendTaxRegime(salary, deductions, newFY);
+      setRecommendation(updated);
+    }
+  };
+
+  // Document extraction callback
+  const handleExtractionComplete = (data: ExtractedSalaryData) => {
+    setExtractedMeta(data);
+
+    // Populate salary from extracted data
+    setSalary({
+      basicSalary: data.basicSalary.value,
+      hraReceived: data.hraReceived.value,
+      specialAllowance: data.specialAllowance.value,
+      lta: data.lta.value,
+      bonus: data.bonus.value,
+      otherAllowances: data.otherAllowances.value,
+      employeePF: data.employeePF.value,
+      employerPF: data.employerPF.value,
+      professionalTax: data.professionalTax.value || 2500,
+    });
+
+    setStep('review-salary');
+  };
+
+  // Salary confirmed -> Proceed to deductions
+  const handleSalaryConfirmed = (confirmedSalary: SalaryComponents) => {
+    setSalary(confirmedSalary);
+    setStep('deductions');
+  };
+
+  // Deductions submitted -> Calculate & Show Dashboard
+  const handleCalculate = (finalDeductions: AdditionalDeductions) => {
+    setDeductions(finalDeductions);
+    const rec = recommendTaxRegime(salary, finalDeductions, financialYear);
+    setRecommendation(rec);
+    setStep('dashboard');
+  };
+
+  // Reset to landing
+  const handleReset = () => {
+    setStep('landing');
+    setExtractedMeta(null);
+    setRecommendation(null);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      {/* Navbar */}
+      <Navbar
+        currentFY={financialYear}
+        onFYChange={handleFYChange}
+        onSelectDemo={handleSelectDemo}
+        onReset={handleReset}
+        hasCalculated={!!recommendation}
+        onOpenReport={() => setStep('dashboard')}
+      />
+
+      {/* Main Body */}
+      <main className="flex-1">
+        {step === 'landing' && (
+          <LandingHero
+            onStartUpload={() => setStep('upload')}
+            onStartManual={() => setStep('review-salary')}
+            onSelectDemo={handleSelectDemo}
+          />
+        )}
+
+        {step === 'upload' && (
+          <SalaryUpload
+            onExtractionComplete={handleExtractionComplete}
+            onSwitchToManual={() => setStep('review-salary')}
+          />
+        )}
+
+        {step === 'review-salary' && (
+          <SalaryReviewForm
+            initialSalary={salary}
+            extractedMeta={extractedMeta}
+            onConfirm={handleSalaryConfirmed}
+            onBack={() => setStep(extractedMeta ? 'upload' : 'landing')}
+          />
+        )}
+
+        {step === 'deductions' && (
+          <DeductionsForm
+            salary={salary}
+            initialDeductions={deductions}
+            onCalculate={handleCalculate}
+            onBack={() => setStep('review-salary')}
+          />
+        )}
+
+        {step === 'dashboard' && recommendation && (
+          <ComparisonDashboard
+            recommendation={recommendation}
+            salary={salary}
+            deductions={deductions}
+            onEditSalary={() => setStep('review-salary')}
+            onEditDeductions={() => setStep('deductions')}
+          />
+        )}
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 no-print">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p>© 2025 TaxWise – Indian Income Tax Regime Recommendation Portal</p>
+          <div className="flex items-center gap-4 text-slate-400">
+            <span>Finance Act 2024 Verified</span>
+            <span>•</span>
+            <span>Section 115BAC & Old Regime</span>
+            <span>•</span>
+            <span>Privacy First (In-Memory Processing)</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

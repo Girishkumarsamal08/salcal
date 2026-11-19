@@ -15,7 +15,7 @@ export function generateTaxPDFReport(
 
   const { oldRegimeResult, newRegimeResult, recommendedRegime, taxSavings, monthlySavings } = recommendation;
   const fy = oldRegimeResult.financialYear;
-  const ay = fy === '2024-2025' ? '2025-2026' : '2024-2025';
+  const ay = fy === '2025-2026' ? '2026-2027' : fy === '2024-2025' ? '2025-2026' : '2024-2025';
 
   // Header Banner
   doc.setFillColor(15, 23, 42); // Deep Navy (#0f172a)

@@ -49,6 +49,17 @@ export function Navbar({
           <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
             <button
               type="button"
+              onClick={() => onFYChange('2025-2026')}
+              className={`px-2.5 py-1 rounded-md font-medium transition-all ${
+                currentFY === '2025-2026'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              FY 25-26 <span className="hidden md:inline">(AY 26-27)</span>
+            </button>
+            <button
+              type="button"
               onClick={() => onFYChange('2024-2025')}
               className={`px-2.5 py-1 rounded-md font-medium transition-all ${
                 currentFY === '2024-2025'

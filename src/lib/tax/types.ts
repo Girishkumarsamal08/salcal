@@ -1,4 +1,4 @@
-export type FinancialYear = '2024-2025' | '2023-2024';
+export type FinancialYear = '2025-2026' | '2024-2025' | '2023-2024';
 
 export type MetroCity = 'metro' | 'non-metro';
 

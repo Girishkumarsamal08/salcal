@@ -13,6 +13,44 @@ export interface DemoProfile {
 
 export const DEMO_PROFILES: DemoProfile[] = [
   {
+    id: 'budget2025-15lpa',
+    name: 'Executive (₹15 LPA)',
+    designation: 'Senior Lead Specialist',
+    badge: 'New Regime Saves ₹81.9k',
+    description: 'Exact scenario from Budget 2025: ₹15L gross salary with ₹2.5L deductions. New Regime tax is ₹97,500 vs Old Regime tax of ₹1,79,400.',
+    annualSalaryLPA: '₹15,00,000 (₹15 LPA)',
+    salary: {
+      basicSalary: 700000,
+      hraReceived: 300000,
+      specialAllowance: 350000,
+      lta: 0,
+      bonus: 150000,
+      otherAllowances: 0,
+      employeePF: 0,
+      employerPF: 0,
+      professionalTax: 0,
+    },
+    deductions: {
+      other80CInvestments: 150000, // ₹1.5L 80C
+      healthInsuranceSelfFamily: 50000, // ₹50k 80D
+      isSelfSeniorCitizen: true,
+      healthInsuranceParents: 0,
+      parentsAgeCategory: 'regular',
+      preventiveHealthCheckup: 0,
+      npsSelfContribution: 50000, // ₹50k NPS (Total deductions = ₹2.5L)
+      employerNPSContribution: 0,
+      homeLoanInterestSelfOccupied: 0,
+      educationLoanInterest: 0,
+      savingsInterestDeduction: 0,
+      otherDeductions: 0,
+      interestIncome: 0,
+      rentalIncome: 0,
+      otherIncome: 0,
+      rentPaidAnnually: 0,
+      cityCategory: 'metro',
+    },
+  },
+  {
     id: 'fresher-5lpa',
     name: 'Aarav Sharma',
     designation: 'Associate Software Engineer',

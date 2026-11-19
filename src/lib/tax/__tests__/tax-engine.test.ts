@@ -151,6 +151,42 @@ describe('Tax Engine - New Tax Regime Calculations (FY 2024-25)', () => {
     expect(res.marginalRelief).toBe(11000);
     expect(res.finalTaxLiability).toBe(10400);
   });
+
+  it('should accurately calculate Budget 2025 (FY 2025-26) 15 LPA salary scenario', () => {
+    // Exact screenshot scenario:
+    // Gross: 15,00,000
+    // Standard deduction: 75,000 -> Taxable: 14,25,000
+    // Slabs: 0-4L: 0, 4-8L (4L @ 5%): 20,000, 8-12L (4L @ 10%): 40,000, 12-14.25L (2.25L @ 15%): 33,750
+    // Slab Tax = 93,750
+    // 4% Cess = 3,750
+    // Final Tax = 97,500
+    const salary: SalaryComponents = {
+      ...defaultSalary,
+      basicSalary: 700000,
+      specialAllowance: 800000, // Gross = 15,00,000
+    };
+    const resNew = calculateNewTaxRegime(salary, defaultDeductions, '2025-2026');
+    expect(resNew.taxableIncome).toBe(1425000);
+    expect(resNew.taxBeforeRebate).toBe(93750);
+    expect(resNew.cess).toBe(3750);
+    expect(resNew.finalTaxLiability).toBe(97500);
+
+    // Old Regime for the same 15 LPA with 2.5L deductions:
+    // Gross: 15L - 50k std deduction - 2.5L deductions = 12L taxable
+    // Tax = 12.5k + 1L + 60k = 1,72,500 + 4% cess (6,900) = 1,79,400
+    const deductions: AdditionalDeductions = {
+      ...defaultDeductions,
+      other80CInvestments: 150000,
+      healthInsuranceSelfFamily: 50000,
+      isSelfSeniorCitizen: true,
+      npsSelfContribution: 50000,
+    };
+    const resOld = calculateOldTaxRegime(salary, deductions, '2025-2026');
+    expect(resOld.taxableIncome).toBe(1200000);
+    expect(resOld.taxBeforeRebate).toBe(172500);
+    expect(resOld.cess).toBe(6900);
+    expect(resOld.finalTaxLiability).toBe(179400);
+  });
 });
 
 describe('Recommendation Engine', () => {
